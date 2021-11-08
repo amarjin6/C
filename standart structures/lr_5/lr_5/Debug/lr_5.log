@@ -1,0 +1,4 @@
+﻿  Source.c
+D:\ЯП\lr_5\lr_5\lr_5\Source.c(29,8): warning C4013: 'system' undefined; assuming extern returning int
+D:\ЯП\lr_5\lr_5\lr_5\Source.c(33,6): warning C4013: 'gets' undefined; assuming extern returning int
+  lr_5.vcxproj -> D:\ЯП\lr_5\lr_5\Debug\lr_5.exe
