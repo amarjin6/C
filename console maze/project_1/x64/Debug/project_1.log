@@ -1,0 +1,3 @@
+﻿  project_1.cpp
+D:\GitHub\C\console maze\project_1\project_1.cpp(35,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  project_1.vcxproj -> D:\GitHub\C\console maze\x64\Debug\project_1.exe

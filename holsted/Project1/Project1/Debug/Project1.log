@@ -1,0 +1,19 @@
+﻿  Class.cpp
+  MainForm.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(3393,15): error C2059: syntax error: 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(3393,16): error C2238: unexpected token(s) preceding ';'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(3403,15): error C2059: syntax error: 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(3403,16): error C2238: unexpected token(s) preceding ';'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(4533,68): error C2143: syntax error: missing ')' before 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(4533,68): error C2143: syntax error: missing ';' before 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(4533,68): error C2059: syntax error: 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wingdi.h(4533,69): error C2059: syntax error: ')'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\msxml.h(9886,39): error C2143: syntax error: missing ')' before 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\msxml.h(9886,39): error C2143: syntax error: missing ';' before 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\msxml.h(9886,39): error C2059: syntax error: 'constant'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\msxml.h(9886,40): error C2059: syntax error: ')'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\msxml.h(9886,45): error C2238: unexpected token(s) preceding ';'
+  Source.cpp
+  Table.cpp
+  .NETFramework,Version=v4.7.1.AssemblyAttributes.cpp
+  Generating Code...

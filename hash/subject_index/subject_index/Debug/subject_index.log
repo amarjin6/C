@@ -1,0 +1,9 @@
+﻿  Source.cpp
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(139): warning C4715: 'page_sss': not all control paths return a value
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(164): warning C4715: 'page_ss': not all control paths return a value
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(189): warning C4715: 'page_s': not all control paths return a value
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(220): warning C4715: 'print_ss': not all control paths return a value
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(245): warning C4715: 'print_s': not all control paths return a value
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(270): warning C4715: 'print': not all control paths return a value
+D:\СИАОД\hash\subject_index\subject_index\Source.cpp(451): warning C4715: 'Del': not all control paths return a value
+  subject_index.vcxproj -> D:\СИАОД\hash\subject_index\Debug\subject_index.exe

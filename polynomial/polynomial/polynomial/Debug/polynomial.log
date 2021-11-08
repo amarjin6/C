@@ -1,0 +1,9 @@
+﻿  Source.c
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(39,22): warning C4020: 'Equality': too many actual parameters
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(53,1): warning C4029: declared formal parameter list different from definition
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(75,15): warning C4013: 'malloc' undefined; assuming extern returning int
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(75,27): warning C4047: '=': 'list' differs in levels of indirection from 'int'
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(243,35): warning C4047: '=': 'list' differs in levels of indirection from 'int'
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(274,39): warning C4047: '=': 'list' differs in levels of indirection from 'int'
+D:\GitHub\C\polynomial\polynomial\polynomial\Source.c(292,13): warning C4098: 'Add': 'void' function returning a value
+  polynomial.vcxproj -> D:\GitHub\C\polynomial\polynomial\Debug\polynomial.exe
