@@ -1,0 +1,6 @@
+﻿  Source.c
+D:\ЯП\lr_8\lr_8\lr_8\Source.c(108,20): warning C4018: '<': signed/unsigned mismatch
+D:\ЯП\lr_8\lr_8\lr_8\Source.c(157,22): warning C4018: '<': signed/unsigned mismatch
+D:\ЯП\lr_8\lr_8\lr_8\Source.c(221,23): warning C4018: '<': signed/unsigned mismatch
+D:\ЯП\lr_8\lr_8\lr_8\Source.c(227,22): warning C4018: '<': signed/unsigned mismatch
+  lr_8.vcxproj -> D:\ЯП\lr_8\lr_8\Debug\lr_8.exe
