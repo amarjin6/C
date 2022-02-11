@@ -1,1 +1,423 @@
+#include <stdio.h>
+#include <conio.h>
+#include <iostream>
+#include <string>
+#include <fstream>
+#define n 100
+#define f1 "D:\\метрология\\lr_1\\Project1\\Project1\\swift.txt"
+#define f2 "operators.txt"
+#define f3 "operands.txt"
+using namespace std;
 
+string operators[]{ "func","guard","+","-","*","/","++","--","=","+=","-=","*=","/=",">",">=","<=","<","==","===","!=", "if", "else","?", "%",",","..","..<","...","&&","||","&","|","()","[]","(",")","[","]","switch","{}","{","}","~","^",">>","<<","&+","&-","&*",":","+++","->",">>=","<<=","print","println","for", "while", "repeat","readline","readLine","readLine()","print()","print()","do","catch","clear()","clear","exit" };
+string operands[]{ "0","1","2","3","4","4","5","6","7","8","9","let","var","static var","static","static let" };
+int c = sizeof(operators) / sizeof(operators[0]);
+int c1 = sizeof(operands) / sizeof(operands[0]);
+
+struct table
+{
+    string word;
+    int k;
+    table* next;
+}*head1, *now1, *tmp1, *head2, *now2, *tmp2;
+
+// Описание структуры анализа кода
+struct code
+{
+    char inf[n];  //инфо часть
+    code* next;
+} *tek, * endN; // указатели на текущий эл и посл.
+
+void Add_to_list(char* s, int k); //ф-ия для занесения валидных слов в список
+int Check_word(string& str, int& k); //ф-ия проверки слова на ; , 4 вида комментариев и пробелы с пустыми строками
+void Find_words(); // ф-ия открытия текстового документа с кодом и последуещего его анализа
+void Add_to_table(); //ф-ия распределения в какую из 2 структур заносить найденное слово
+int is_suitable(char* s); //ф-ия сверки слова со строковым массивом операторов или операндов
+int Table(char* s, int k); // ф-ия занесения слова в список и проход по списку для определения есть ли в нем такое слово
+int Table_check(string s, int k); // ф-ия проверки есть ли данное слово в списке
+int compare(char* str1, char* str2); //ф-ия сравнения слов
+
+int compare(char* str1, char* str2)
+{
+    int len = 0;
+    if (strlen(str1) >= strlen(str2))
+    {
+        len = strlen(str2);
+    }
+
+    if (strlen(str2) > strlen(str1))
+    {
+        len = strlen(str1);
+    }
+
+    for (int i = 0; i < len; i++)
+    {
+        if (str1[i] != str2[i])
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+int is_suitable(char *s)
+{
+    char str1[1];
+    strncpy(str1, s, 1);
+    int k = atoi(str1);
+    for (int i = 0; i < c; i++)
+    {
+        int m = -1;
+        int d = operators[i].length();
+        if (d == k)
+        {
+            m = 0;
+            for (int j = 0; j < k; j++)
+            {
+                if (s[j + 1] == operators[i][j])
+                {
+                    m++;
+                }
+            }
+        }
+
+        if (m == k)
+        {
+            return 0;
+        }
+    }
+
+    for (int i = 0; i < c1; i++)
+    {
+        int m = -1;
+        int d = operands[i].length();
+        if (d == k)
+        {
+            m = 0;
+            for (int j = 0; j < k; j++)
+            {
+                if (s[j+1] == operands[i][j])
+                {
+                    m++;
+                }
+            }
+        }
+
+        if (m == k)
+        {
+            return 1;
+        }
+    }
+    return 2;
+}
+
+void Add_to_table()
+{
+    code* p = tek;
+    while (p != NULL)
+    {
+        if (is_suitable(p->inf) == 0)
+        {
+            char s[n];
+            char func[5];
+            char ss[] = "4func";
+            strncpy(func, p->inf,5);
+            if (compare(func,ss) == 0)
+            {
+                code* c = p->next;
+                for (int i = 0; i < n; i++)
+                {
+                    s[i] = c->inf[i];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    s[i] = p->inf[i];
+                }
+            }
+            Table(s, 0);
+
+        }
+        
+        if (is_suitable(p->inf) == 1)
+        {
+            char s[n];
+            char let[4];
+            strncpy(let, p->inf, 4);
+            char var[4];
+            strncpy(var, p->inf, 4);
+            char statics[7];
+            strncpy(statics, p->inf, 7);
+            char ss0[] = "3let";
+            char ss1[] = "3var";
+            char ss2[] = "6static";
+            if (compare(let, ss0) == 0|| compare(var, ss1) == 0|| compare(statics, ss2) == 0)
+            {
+                code* c = p->next;
+                for (int i = 0; i < n; i++)
+                {
+                    s[i] = c->inf[i];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    s[i] = p->inf[i];
+                }
+            }
+            Table(s, 1);
+        }
+        p = p->next;
+    }
+}
+
+int Check_word(string &str, int &k)
+{
+    if (k != 2)
+    {
+        int i = 0;
+        int len = (int)str.size();
+        char s[n];
+        while (i < (int)(len - 1))
+        {
+            while (str[i] == ' ' && i < (int)(len - 1))
+            {
+                i++;
+            }
+
+            int start = i;
+
+            while (str[i] != ' ' && i < (int)(len))
+            {
+                i++;
+            }
+
+            int end = i;
+            int l = 0;
+            for (int i = 0; i < n; i++)
+            {
+                s[i] = '/0';
+            }
+            for (int k = start; k < end; k++)
+            {
+                s[l] = str[k];
+                l++;
+            }
+            if (s[l-1] == ';')
+                l--;
+
+            if (s[0] == '/') //
+            {
+                if (s[1] == '/')
+                    return 0;
+            }
+
+            if (s[0] == '/') //
+            {
+                if (s[1] == '*')
+                    return 2;
+            }
+            if (l >= 1)
+                Add_to_list(s,l);
+        }
+        return 1;
+    }
+
+    if (k == 2)
+    {
+        int i = 0;
+        int len = (int)str.size();
+        while (i < (int)(len - 1))
+        {
+            if (str[i] == '*') //
+            {
+                if (str[i+1] == '/')
+                    return 0;
+            }
+
+            if (str[i] == '*') //
+            {
+                if (str[i + 1] == '*')
+                {
+                    if (str[i + 2] == '/')
+                    {
+                        return 0;
+                    }
+                }
+            }
+            i++;
+        }
+        return 2;
+    }
+    return 3;
+}
+
+void Find_words()
+{
+    ifstream file(f1);
+    string line;
+    int k = 0;
+    while (file.peek() != EOF)
+    {
+        getline(file, line);
+        k = Check_word(line, k);
+    }
+    file.close();
+    Add_to_table();
+}
+
+// Добавление элемента в конец списка
+void Add_to_list(char *s, int k)
+{
+    code* p = new code;
+    p->inf[0] = '0' + k;
+    for (int i = 0; i < k; i++)
+    {
+        p->inf[i+1] = s[i];
+    }
+    if (tek == NULL)
+    {
+        tek = p;
+    }
+    else
+    {
+        endN->next = p;
+    }
+    p->next = NULL;
+    endN = p;
+};
+
+int Table(char* s, int k)
+{
+    if (k == 0)
+    {
+        table* p = new table;
+        char str1[1];
+        strncpy(str1, s, 1);
+        int m = (int)(str1[0]) - (int)'0';
+        for (int i = 1; i < m+1; i++)
+        {
+            p->word += s[i];
+        }
+        p->k = 1;
+        if (Table_check(p->word,0) == 0)
+        {
+            if (head1 == NULL)
+            {
+                head1 = p;
+            }
+            else
+            {
+                now1->next = p;
+            }
+            p->next = NULL;
+            now1 = p;
+            return 0;
+        }
+
+        if (Table_check(p->word, 0) == 1)
+        {
+            tmp1->k++;
+            return 0;
+        }
+    }
+
+    if (k == 1)
+    {
+        table* p = new table;
+        char str1[1];
+        strncpy(str1, s, 1);
+        int m = (int)(str1[0]) - (int)'0';
+        for (int i = 1; i < m + 1; i++)
+        {
+            p->word += s[i];
+        }
+        p->k = 1;
+        if (Table_check(p->word, 1) == 0)
+        {
+            if (head2 == NULL)
+            {
+                head2 = p;
+            }
+            else
+            {
+                now2->next = p;
+            }
+            p->next = NULL;
+            now2 = p;
+            return 0;
+        }
+
+        if (Table_check(p->word, 1) == 1)
+        {
+            tmp2->k++;
+            return 0;
+        }
+    }
+    return 0;
+};
+
+int Table_check(string s, int k)
+{
+    table* p = new table;
+    if (k == 0)
+    {
+        p = head1;
+        while (p != NULL)
+        {
+            if (p->word == s)
+            {
+                tmp1 = p;
+                return 1;
+            }
+            p = p->next;
+        }
+        return 0;
+    }
+
+    if (k == 1)
+    {
+        p = head2;
+        while (p != NULL)
+        {
+            if (p->word == s)
+            {
+                tmp2 = p;
+                return 1;
+            }
+            p = p->next;
+        }
+        return 0;
+    }
+    return 2;
+}
+
+
+// Завершение
+int main()
+{
+    Find_words();
+    std::ofstream a(f2);
+    table* p = new table;
+    p = head1;
+    while (p != NULL)
+    {
+        a << p->word << endl;
+        a << p->k << endl;
+        p = p->next;
+    }
+    a.close();
+    std::ofstream b(f3);
+    p = head2;
+    while (p != NULL)
+    {
+        b << p->word << endl;
+        b << p->k << endl;
+        p = p->next;
+    }
+    b.close();
+};
